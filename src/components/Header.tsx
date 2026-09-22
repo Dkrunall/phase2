@@ -207,14 +207,14 @@ export default function Header({ onScrollToSection, onDownloadEPK }: HeaderProps
               <span className="hidden sm:inline font-mono">@rabiaxmariya</span>
             </a>
 
-            {/* EPK Download Capsule Button */}
+            {/* Presskit Download Capsule Button */}
             <button
               onClick={onDownloadEPK}
-              data-cursor="EPK"
+              data-cursor="PRESSKIT"
               className="hidden sm:inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full bg-gold/15 hover:bg-gold text-gold hover:text-black border border-gold/40 hover:border-gold transition-all duration-300 cursor-pointer text-[9px] font-bold tracking-[0.2em] shadow-sm"
             >
               <Download className="w-3 h-3 text-current" />
-              <span>EPK</span>
+              <span>PRESSKIT</span>
             </button>
 
             {/* Mobile Hamburger Pill Trigger */}
@@ -334,7 +334,7 @@ export default function Header({ onScrollToSection, onDownloadEPK }: HeaderProps
                 <ExternalLink className="w-3.5 h-3.5 text-neutral-500" />
               </a>
 
-              {/* EPK Download Button */}
+              {/* Presskit Download Button */}
               <button
                 onClick={() => {
                   setIsMobileMenuOpen(false);
@@ -343,7 +343,7 @@ export default function Header({ onScrollToSection, onDownloadEPK }: HeaderProps
                 className="w-full py-4 rounded-full bg-white hover:bg-gold text-black font-bold uppercase tracking-[0.3em] text-[10px] transition-all flex items-center justify-center space-x-2 cursor-pointer shadow-lg"
               >
                 <Download className="w-3.5 h-3.5 text-black" />
-                <span>DOWNLOAD EPK & RIDER</span>
+                <span>DOWNLOAD PRESSKIT & RIDER</span>
               </button>
 
               {/* Management & Booking Desk copy button */}

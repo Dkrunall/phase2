@@ -252,7 +252,7 @@ export default function TourSection({ onScrollToSection, onDownloadEPK }: TourSe
               className="inline-flex items-center space-x-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-gold/10 hover:bg-gold text-gold hover:text-black border border-gold/40 hover:border-gold transition-all duration-300 text-[8px] sm:text-[9px] uppercase font-bold tracking-widest cursor-pointer"
             >
               <Download className="w-3 h-3" />
-              <span>TECH RIDER &amp; EPK</span>
+              <span>PRESSKIT &amp; TECH RIDER</span>
             </button>
           </div>
         </div>
@@ -295,8 +295,7 @@ export default function TourSection({ onScrollToSection, onDownloadEPK }: TourSe
               transition={{ duration: 0.4, delay: idx * 0.03 }}
               onMouseEnter={() => setHoveredEvent(event)}
               data-cursor="EVENT"
-              className="group relative p-4 sm:p-6 md:p-7 bg-neutral-950/70 border border-neutral-900/90 hover:border-gold/60 transition-all duration-400 overflow-hidden cursor-pointer shadow-xl"
-              onClick={() => onScrollToSection('booking-section')}
+              className="group relative p-4 sm:p-6 md:p-7 bg-neutral-950/70 border border-neutral-900/90 hover:border-gold/60 transition-all duration-400 overflow-hidden cursor-default shadow-xl"
             >
               {/* Subtle background glow on hover */}
               <div className="absolute inset-0 bg-gradient-to-r from-gold/[0.04] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
@@ -341,22 +340,11 @@ export default function TourSection({ onScrollToSection, onDownloadEPK }: TourSe
 
                 </div>
 
-                {/* Right: Booking Inquiry CTA */}
+                {/* Right: Status Pill */}
                 <div className="flex items-center space-x-4 sm:space-x-6 flex-shrink-0 pt-3 lg:pt-0 border-t lg:border-t-0 border-white/5 justify-between sm:justify-end w-full lg:w-auto">
-                  <span className="text-[9px] font-mono tracking-[0.25em] text-neutral-500 uppercase hidden md:inline">
+                  <span className="text-[8px] sm:text-[9px] font-mono tracking-[0.25em] text-neutral-400 uppercase px-3 py-1.5 rounded-full bg-neutral-900/90 border border-neutral-800">
                     PAST PERFORMANCE
                   </span>
-
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onScrollToSection('booking-section');
-                    }}
-                    className="w-full sm:w-auto inline-flex items-center justify-center space-x-2.5 px-5 py-2.5 bg-white group-hover:bg-gold text-black font-bold uppercase tracking-[0.25em] text-[9px] transition-all duration-300 shadow-md cursor-pointer"
-                  >
-                    <span>BOOK EVENT</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-black group-hover:translate-x-1 transition-transform" />
-                  </button>
                 </div>
 
               </div>

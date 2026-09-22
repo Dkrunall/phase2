@@ -315,7 +315,7 @@ Phone / WhatsApp: +91 95946 91939`;
               className="px-8 py-3 border border-neutral-800 text-neutral-400 hover:text-gold hover:border-gold hover:bg-gold/5 transition-all duration-500 uppercase tracking-widest text-[9px] font-bold font-sans cursor-pointer flex items-center justify-center space-x-2.5 mx-auto rounded-none"
             >
               <Download className="w-3.5 h-3.5" />
-              <span>DOWNLOAD TECH RIDER & EPK</span>
+              <span>DOWNLOAD PRESSKIT &amp; TECH RIDER</span>
             </button>
           </div>
 

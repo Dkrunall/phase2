@@ -1,18 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { 
   ArrowUp, 
   Download, 
-  Mail, 
-  Phone,
-  Sparkles, 
-  Check, 
-  Copy, 
-  ArrowUpRight,
-  Clock
+  ArrowUpRight 
 } from 'lucide-react';
 
 interface FooterProps {
@@ -30,8 +23,6 @@ const InstagramSvg = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 export default function Footer({ onScrollToSection, onDownloadEPK }: FooterProps) {
-  const [copiedEmail, setCopiedEmail] = useState(false);
-  const [copiedPhone, setCopiedPhone] = useState(false);
   const [worldTimes, setWorldTimes] = useState({
     ibiza: '--:--:--',
     london: '--:--:--',
@@ -55,18 +46,6 @@ export default function Footer({ onScrollToSection, onDownloadEPK }: FooterProps
     const interval = setInterval(updateTimes, 1000);
     return () => clearInterval(interval);
   }, []);
-
-  const handleCopyEmail = (email: string) => {
-    navigator.clipboard.writeText(email);
-    setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2000);
-  };
-
-  const handleCopyPhone = (phone: string) => {
-    navigator.clipboard.writeText(phone);
-    setCopiedPhone(true);
-    setTimeout(() => setCopiedPhone(false), 2000);
-  };
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -134,100 +113,28 @@ export default function Footer({ onScrollToSection, onDownloadEPK }: FooterProps
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-16 md:py-20 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-start">
           
-          {/* Column 1: Monogram & Direct Contact Pill (Span 5) */}
-          <div className="md:col-span-5 space-y-6">
+          {/* Column 1: Brand Logo & Tagline (Span 5) */}
+          <div className="md:col-span-5 space-y-4">
             <div 
               onClick={scrollToTop}
               data-cursor="TOP"
               className="inline-flex flex-col cursor-pointer group space-y-3"
             >
-              <div className="relative w-16 h-15 sm:w-20 sm:h-18">
+              <div className="relative w-24 h-22 sm:w-28 sm:h-26">
                 <Image
                   src="/images/phase2-logo-white.png"
                   alt="PHASE 2"
-                  width={80}
-                  height={76}
-                  className="w-auto h-14 sm:h-16 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] group-hover:drop-shadow-[0_0_20px_rgba(212,175,55,0.5)] transition-all duration-300"
+                  width={110}
+                  height={104}
+                  className="w-auto h-16 sm:h-20 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.25)] group-hover:drop-shadow-[0_0_25px_rgba(212,175,55,0.5)] transition-all duration-300"
                 />
               </div>
-              <div>
-                <div className="font-serif text-2xl sm:text-3xl font-black tracking-[0.2em] text-white flex items-center space-x-1">
-                  <span>PHASE</span>
-                  <span className="text-gold group-hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.8)] transition-all duration-300">2</span>
-                </div>
-                <div className="text-[9px] uppercase tracking-[0.4em] text-neutral-400 font-mono mt-1 group-hover:text-gold transition-colors">
-                  RABIA &amp; MARIYA &bull; SISTER DUO
-                </div>
+              <div className="text-[10px] uppercase tracking-[0.4em] text-neutral-400 font-mono group-hover:text-gold transition-colors">
+                RABIA &amp; MARIYA &bull; SISTER DUO
               </div>
-            </div>
-
-            {/* Management & Direct Inquiry Desk */}
-            <div className="pt-2 space-y-4">
-              <div className="flex items-center space-x-4">
-                <div className="relative w-20 h-16 sm:w-24 sm:h-18 flex-shrink-0">
-                  <Image
-                    src="/images/andfriends-logo.png"
-                    alt="&friends"
-                    fill
-                    className="object-contain filter brightness-125"
-                  />
-                </div>
-                <div>
-                  <span className="text-[9px] font-mono uppercase tracking-[0.3em] text-gold font-bold block">
-                    MANAGED BY &friends
-                  </span>
-                  <span className="text-[11px] text-neutral-300 font-mono tracking-wider block mt-0.5">
-                    DARSHAK
-                  </span>
-                  <span className="text-[9px] text-neutral-500 font-mono tracking-widest block">
-                    GLOBAL ARTIST MGMT
-                  </span>
-                </div>
-              </div>
-
-              <div className="space-y-2 max-w-sm">
-                {/* Email Pill */}
-                <div className="flex items-center space-x-2">
-                  <a
-                    href="mailto:darshak@andfriends.in"
-                    data-cursor="EMAIL"
-                    className="flex-1 group flex items-center space-x-3 px-3.5 py-2.5 bg-neutral-950 border border-neutral-800 hover:border-gold/60 transition-all duration-300 shadow-md text-[10px] font-mono tracking-wider truncate"
-                  >
-                    <Mail className="w-3.5 h-3.5 text-gold flex-shrink-0" />
-                    <span className="text-neutral-200 group-hover:text-white truncate">darshak@andfriends.in</span>
-                  </a>
-                  <button
-                    onClick={() => handleCopyEmail('darshak@andfriends.in')}
-                    data-cursor="COPY"
-                    className="px-3 py-2.5 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 hover:border-gold text-neutral-400 hover:text-gold transition-colors cursor-pointer text-[9px] font-mono tracking-widest flex items-center space-x-1 flex-shrink-0"
-                    title="Copy Email"
-                  >
-                    {copiedEmail ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-                    <span>{copiedEmail ? 'COPIED' : 'COPY'}</span>
-                  </button>
-                </div>
-
-                {/* Phone Pill */}
-                <div className="flex items-center space-x-2">
-                  <a
-                    href="tel:+919594691939"
-                    data-cursor="CALL"
-                    className="flex-1 group flex items-center space-x-3 px-3.5 py-2.5 bg-neutral-950 border border-neutral-800 hover:border-gold/60 transition-all duration-300 shadow-md text-[10px] font-mono tracking-wider truncate"
-                  >
-                    <Phone className="w-3.5 h-3.5 text-gold flex-shrink-0" />
-                    <span className="text-neutral-200 group-hover:text-white">+91 95946 91939</span>
-                  </a>
-                  <button
-                    onClick={() => handleCopyPhone('+919594691939')}
-                    data-cursor="COPY"
-                    className="px-3 py-2.5 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 hover:border-gold text-neutral-400 hover:text-gold transition-colors cursor-pointer text-[9px] font-mono tracking-widest flex items-center space-x-1 flex-shrink-0"
-                    title="Copy Phone"
-                  >
-                    {copiedPhone ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-                    <span>{copiedPhone ? 'COPIED' : 'COPY'}</span>
-                  </button>
-                </div>
-              </div>
+              <p className="text-xs text-neutral-500 font-sans max-w-sm leading-relaxed tracking-wide pt-1">
+                A transcendent electronic music project fusing melodic techno, afro house, and bolly-tech into an intoxicating sensory spectacle.
+              </p>
             </div>
           </div>
 
@@ -277,15 +184,15 @@ export default function Footer({ onScrollToSection, onDownloadEPK }: FooterProps
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
 
-              {/* EPK & Tech Rider Download */}
+              {/* Presskit & Tech Rider Download */}
               <button
                 onClick={onDownloadEPK}
-                data-cursor="EPK"
+                data-cursor="PRESSKIT"
                 className="w-full flex items-center justify-between px-4 py-3 bg-neutral-900/60 hover:bg-neutral-900 border border-neutral-800 hover:border-gold/50 text-neutral-300 hover:text-white transition-all duration-300 text-[9px] font-mono tracking-widest uppercase font-bold cursor-pointer"
               >
                 <div className="flex items-center space-x-2">
                   <Download className="w-3.5 h-3.5 text-gold" />
-                  <span>OFFICIAL EPK &amp; RIDER</span>
+                  <span>OFFICIAL PRESSKIT &amp; RIDER</span>
                 </div>
                 <span className="text-[8px] text-neutral-500 font-mono">[PDF]</span>
               </button>
