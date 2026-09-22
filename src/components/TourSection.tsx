@@ -1,23 +1,18 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence, useSpring, useMotionValue } from 'framer-motion';
 import Image from 'next/image';
-import { Sparkles, Calendar, MapPin, ArrowRight, Download, Ticket, ExternalLink } from 'lucide-react';
+import { Sparkles, MapPin, ArrowRight, Download } from 'lucide-react';
 
-interface TourShow {
+interface PastEvent {
   id: string;
-  date: string;
-  day: string;
-  month: string;
-  year: string;
+  index: string;
   venue: string;
-  stage: string;
   city: string;
   country: string;
-  region: 'europe' | 'middle-east' | 'asia' | 'all';
-  timezone: string;
-  status: 'Selling Fast' | 'Limited VIP' | 'Guestlist Only' | 'Headline Debut';
+  badge: string;
+  category: 'all' | 'mumbai' | 'india' | 'destination';
   image: string;
 }
 
@@ -27,8 +22,8 @@ interface TourSectionProps {
 }
 
 export default function TourSection({ onScrollToSection, onDownloadEPK }: TourSectionProps) {
-  const [selectedRegion, setSelectedRegion] = useState<'all' | 'europe' | 'middle-east' | 'asia'>('all');
-  const [hoveredShow, setHoveredShow] = useState<TourShow | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'mumbai' | 'india' | 'destination'>('all');
+  const [hoveredEvent, setHoveredEvent] = useState<PastEvent | null>(null);
 
   // Floating image cursor physics
   const mouseX = useMotionValue(0);
@@ -43,93 +38,178 @@ export default function TourSection({ onScrollToSection, onDownloadEPK }: TourSe
     mouseY.set(e.clientY);
   };
 
-  const shows: TourShow[] = [
+  const pastEvents: PastEvent[] = [
     {
-      id: 'show-1',
-      date: '05.06',
-      day: '05',
-      month: 'JUN',
-      year: '2026',
-      venue: 'Hï Ibiza (Theatre)',
-      stage: 'Club Theatre Mainstage',
-      city: 'Ibiza',
-      country: 'Spain',
-      region: 'europe',
-      timezone: 'CEST',
-      status: 'Selling Fast',
+      id: 'event-1',
+      index: '01',
+      venue: 'Mosiqi',
+      city: 'Mumbai',
+      country: 'India',
+      badge: 'Club Showcase',
+      category: 'mumbai',
       image: '/images/gallery/street-jacket-01.jpg'
     },
     {
-      id: 'show-2',
-      date: '12.06',
-      day: '12',
-      month: 'JUN',
-      year: '2026',
-      venue: 'Pacha Club (Main Room)',
-      stage: 'Official Residency Night',
-      city: 'Ibiza',
-      country: 'Spain',
-      region: 'europe',
-      timezone: 'CEST',
-      status: 'Limited VIP',
+      id: 'event-2',
+      index: '02',
+      venue: 'Sun Dip',
+      city: 'Yacht Party',
+      country: 'Offshore Experience',
+      badge: 'VIP Yacht Party',
+      category: 'destination',
       image: '/images/gallery/dramatic-light-01.jpg'
     },
     {
-      id: 'show-3',
-      date: '20.06',
-      day: '20',
-      month: 'JUN',
-      year: '2026',
-      venue: 'Bolly-Tech Arena',
-      stage: 'Headlining 15,000 Cap Arena',
+      id: 'event-3',
+      index: '03',
+      venue: 'Flounge By FTV',
+      city: 'Raipur',
+      country: 'India',
+      badge: 'FTV Night',
+      category: 'india',
+      image: '/images/gallery/editorial-bw-01.jpg'
+    },
+    {
+      id: 'event-4',
+      index: '04',
+      venue: 'Cocktails & Dreams',
+      city: 'Indore',
+      country: 'India',
+      badge: 'Headline Set',
+      category: 'india',
+      image: '/images/gallery/street-jacket-02.jpg'
+    },
+    {
+      id: 'event-5',
+      index: '05',
+      venue: 'Kojak',
       city: 'Mumbai',
       country: 'India',
-      region: 'asia',
-      timezone: 'IST',
-      status: 'Headline Debut',
+      badge: 'Club Night',
+      category: 'mumbai',
+      image: '/images/gallery/dramatic-light-02.jpg'
+    },
+    {
+      id: 'event-6',
+      index: '06',
+      venue: 'Baaroq',
+      city: 'Mumbai',
+      country: 'India',
+      badge: 'Signature Set',
+      category: 'mumbai',
+      image: '/images/gallery/editorial-bw-02.jpg'
+    },
+    {
+      id: 'event-7',
+      index: '07',
+      venue: 'Private Event',
+      city: 'Phuket',
+      country: 'Thailand',
+      badge: 'International VIP',
+      category: 'destination',
+      image: '/images/gallery/street-jacket-03.jpg'
+    },
+    {
+      id: 'event-8',
+      index: '08',
+      venue: 'Toyroom',
+      city: 'Pune',
+      country: 'India',
+      badge: 'Club Takeover',
+      category: 'india',
       image: '/images/gallery/leopard-duo-01.jpg'
     },
     {
-      id: 'show-4',
-      date: '27.06',
-      day: '27',
-      month: 'JUN',
-      year: '2026',
-      venue: 'Toy Room DXB',
-      stage: 'Exclusive Rooftop Club Set',
+      id: 'event-9',
+      index: '09',
+      venue: 'Vagalum',
+      city: 'Goa',
+      country: 'India',
+      badge: 'Coastal Afro Session',
+      category: 'india',
+      image: '/images/gallery/dramatic-light-03.jpg'
+    },
+    {
+      id: 'event-10',
+      index: '10',
+      venue: 'Kai Bar & Kitchen',
+      city: 'Bangalore',
+      country: 'India',
+      badge: 'Headline Session',
+      category: 'india',
+      image: '/images/gallery/editorial-bw-03.jpg'
+    },
+    {
+      id: 'event-11',
+      index: '11',
+      venue: 'Mantis',
       city: 'Dubai',
       country: 'UAE',
-      region: 'middle-east',
-      timezone: 'GST',
-      status: 'Guestlist Only',
+      badge: 'Superclub Debut',
+      category: 'destination',
       image: '/images/gallery/street-jacket-04.jpg'
     },
     {
-      id: 'show-5',
-      date: '04.07',
-      day: '04',
-      month: 'JUL',
-      year: '2026',
-      venue: 'Ministry of Sound',
-      stage: 'The Box & 103 Soundclash',
-      city: 'London',
-      country: 'UK',
-      region: 'europe',
-      timezone: 'BST',
-      status: 'Selling Fast',
+      id: 'event-12',
+      index: '12',
+      venue: 'Baanng',
+      city: 'Mumbai',
+      country: 'India',
+      badge: 'High Energy Set',
+      category: 'mumbai',
+      image: '/images/gallery/street-jacket-05.jpg'
+    },
+    {
+      id: 'event-13',
+      index: '13',
+      venue: 'KIKI',
+      city: 'Pune',
+      country: 'India',
+      badge: 'Sunset Session',
+      category: 'india',
+      image: '/images/gallery/dramatic-light-01.jpg'
+    },
+    {
+      id: 'event-14',
+      index: '14',
+      venue: 'Opa Bar & Cafe',
+      city: 'Mumbai',
+      country: 'India',
+      badge: 'Midnight Residency',
+      category: 'mumbai',
       image: '/images/gallery/editorial-bw-01.jpg'
+    },
+    {
+      id: 'event-15',
+      index: '15',
+      venue: 'Waikiki',
+      city: 'Mumbai',
+      country: 'India',
+      badge: 'Afro House Vibe',
+      category: 'mumbai',
+      image: '/images/gallery/street-jacket-02.jpg'
+    },
+    {
+      id: 'event-16',
+      index: '16',
+      venue: 'The Nest at Waikiki',
+      city: 'Mumbai',
+      country: 'India',
+      badge: 'Rooftop Showcase',
+      category: 'mumbai',
+      image: '/images/gallery/editorial-bw-02.jpg'
     }
   ];
 
-  const filteredShows = selectedRegion === 'all' 
-    ? shows 
-    : shows.filter(show => show.region === selectedRegion);
+  const filteredEvents = selectedCategory === 'all' 
+    ? pastEvents 
+    : pastEvents.filter(event => event.category === selectedCategory);
 
-  const regionTabs = [
-    { label: 'ALL DESTINATIONS', key: 'all' as const, count: shows.length },
-    { label: 'EUROPE / IBIZA', key: 'europe' as const, count: shows.filter(s => s.region === 'europe').length },
-    { label: 'MIDDLE EAST', key: 'middle-east' as const, count: shows.filter(s => s.region === 'middle-east').length },
-    { label: 'ASIA / INDIA', key: 'asia' as const, count: shows.filter(s => s.region === 'asia').length }
+  const categoryTabs = [
+    { label: 'ALL EVENTS', key: 'all' as const, count: pastEvents.length },
+    { label: 'MUMBAI', key: 'mumbai' as const, count: pastEvents.filter(e => e.category === 'mumbai').length },
+    { label: 'INDIA TOURING', key: 'india' as const, count: pastEvents.filter(e => e.category === 'india').length },
+    { label: 'DESTINATION / INT\'L', key: 'destination' as const, count: pastEvents.filter(e => e.category === 'destination').length }
   ];
 
   return (
@@ -145,15 +225,15 @@ export default function TourSection({ onScrollToSection, onDownloadEPK }: TourSe
 
       <div className="max-w-7xl mx-auto relative z-10 space-y-10 sm:space-y-16">
         
-        {/* Minimal Tour Header */}
+        {/* Minimal Past Events Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 sm:pb-8 border-b border-white/10">
           <div>
             <div className="flex items-center space-x-2 text-gold text-[8px] sm:text-[9px] uppercase font-mono tracking-[0.3em] sm:tracking-[0.4em] font-semibold mb-2">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>// 03. GLOBAL TOUR 2026</span>
+              <span>// 03. ARCHIVE // PAST EVENTS &amp; SHOWCASES</span>
             </div>
             <h2 className="font-serif text-2xl sm:text-4xl md:text-6xl text-white font-light tracking-wide uppercase leading-tight">
-              World Tour &amp; <span className="font-serif italic text-gold font-normal">Residencies</span>
+              Past Events &amp; <span className="font-serif italic text-gold font-normal">Showcases</span>
             </h2>
           </div>
 
@@ -163,7 +243,7 @@ export default function TourSection({ onScrollToSection, onDownloadEPK }: TourSe
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
               </span>
-              <span className="uppercase font-semibold">TICKETS ACTIVE</span>
+              <span className="uppercase font-semibold">16 ARCHIVED PERFORMANCES</span>
             </div>
 
             <button
@@ -172,19 +252,19 @@ export default function TourSection({ onScrollToSection, onDownloadEPK }: TourSe
               className="inline-flex items-center space-x-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-gold/10 hover:bg-gold text-gold hover:text-black border border-gold/40 hover:border-gold transition-all duration-300 text-[8px] sm:text-[9px] uppercase font-bold tracking-widest cursor-pointer"
             >
               <Download className="w-3 h-3" />
-              <span>TECH RIDER & EPK</span>
+              <span>TECH RIDER &amp; EPK</span>
             </button>
           </div>
         </div>
 
-        {/* Region Filter Pill Bar */}
+        {/* Category Filter Pill Bar */}
         <div className="flex flex-wrap items-center gap-2">
-          {regionTabs.map((tab) => {
-            const isSelected = selectedRegion === tab.key;
+          {categoryTabs.map((tab) => {
+            const isSelected = selectedCategory === tab.key;
             return (
               <button
                 key={tab.key}
-                onClick={() => setSelectedRegion(tab.key)}
+                onClick={() => setSelectedCategory(tab.key)}
                 data-cursor="FILTER"
                 className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[8px] sm:text-[9px] uppercase font-mono tracking-[0.2em] sm:tracking-[0.25em] transition-all duration-300 cursor-pointer flex items-center space-x-1.5 sm:space-x-2 ${
                   isSelected
@@ -201,20 +281,20 @@ export default function TourSection({ onScrollToSection, onDownloadEPK }: TourSe
           })}
         </div>
 
-        {/* Interactive Tour Schedule Cards List */}
+        {/* Interactive Past Events List */}
         <div 
           className="space-y-3"
-          onMouseLeave={() => setHoveredShow(null)}
+          onMouseLeave={() => setHoveredEvent(null)}
         >
-          {filteredShows.map((show, idx) => (
+          {filteredEvents.map((event, idx) => (
             <motion.div
-              key={show.id}
+              key={event.id}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: idx * 0.05 }}
-              onMouseEnter={() => setHoveredShow(show)}
-              data-cursor="TOUR"
+              transition={{ duration: 0.4, delay: idx * 0.03 }}
+              onMouseEnter={() => setHoveredEvent(event)}
+              data-cursor="EVENT"
               className="group relative p-4 sm:p-6 md:p-7 bg-neutral-950/70 border border-neutral-900/90 hover:border-gold/60 transition-all duration-400 overflow-hidden cursor-pointer shadow-xl"
               onClick={() => onScrollToSection('booking-section')}
             >
@@ -223,50 +303,48 @@ export default function TourSection({ onScrollToSection, onDownloadEPK }: TourSe
 
               <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-5 sm:gap-6">
                 
-                {/* Left: Date Capsule & Venue Details */}
+                {/* Left: Index Number & Venue Details */}
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-7">
                   
-                  {/* High-Fashion Date Monogram */}
+                  {/* High-Fashion Number Monogram */}
                   <div className="flex sm:flex-col items-center justify-center w-auto sm:w-16 sm:h-16 px-3 py-1.5 sm:p-0 bg-neutral-900/90 border border-neutral-800 group-hover:border-gold/50 flex-shrink-0 transition-colors">
                     <span className="font-serif text-xl sm:text-2xl font-black text-white group-hover:text-gold transition-colors leading-none">
-                      {show.day}
+                      {event.index}
                     </span>
-                    <span className="text-[8px] font-mono tracking-[0.2em] sm:tracking-[0.25em] text-neutral-400 uppercase font-bold sm:mt-1 ml-2 sm:ml-0">
-                      {show.month}
+                    <span className="text-[7px] font-mono tracking-[0.2em] sm:tracking-[0.25em] text-neutral-500 uppercase font-bold sm:mt-1 ml-2 sm:ml-0">
+                      PAST
                     </span>
                   </div>
 
-                  {/* Venue & Stage Info */}
+                  {/* Venue & Location Info */}
                   <div className="space-y-1">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="text-[7px] sm:text-[8px] font-mono tracking-widest text-gold uppercase px-2 py-0.5 bg-gold/10 border border-gold/30">
-                        {show.status}
+                        {event.badge}
                       </span>
                       <span className="text-[8px] sm:text-[9px] font-mono tracking-widest text-neutral-500 uppercase">
-                        {show.stage}
+                        ARCHIVED SHOW
                       </span>
                     </div>
 
                     <h3 className="font-serif text-xl sm:text-2xl md:text-3xl text-white uppercase tracking-wider font-semibold group-hover:text-gold group-hover:translate-x-1 transition-all duration-300">
-                      {show.venue}
+                      {event.venue}
                     </h3>
 
                     <div className="flex flex-wrap items-center gap-2 text-xs text-neutral-400 font-sans tracking-wide">
                       <span className="flex items-center space-x-1 text-white">
                         <MapPin className="w-3 h-3 text-gold flex-shrink-0" />
-                        <span>{show.city}, {show.country}</span>
+                        <span>{event.city}, {event.country}</span>
                       </span>
-                      <span className="text-neutral-700 hidden xs:inline">&bull;</span>
-                      <span className="font-mono text-[9px] text-neutral-500">[{show.timezone}]</span>
                     </div>
                   </div>
 
                 </div>
 
-                {/* Right: Action & Inquiry Button */}
+                {/* Right: Booking Inquiry CTA */}
                 <div className="flex items-center space-x-4 sm:space-x-6 flex-shrink-0 pt-3 lg:pt-0 border-t lg:border-t-0 border-white/5 justify-between sm:justify-end w-full lg:w-auto">
                   <span className="text-[9px] font-mono tracking-[0.25em] text-neutral-500 uppercase hidden md:inline">
-                    OFFICIAL STOP
+                    PAST PERFORMANCE
                   </span>
 
                   <button
@@ -276,7 +354,7 @@ export default function TourSection({ onScrollToSection, onDownloadEPK }: TourSe
                     }}
                     className="w-full sm:w-auto inline-flex items-center justify-center space-x-2.5 px-5 py-2.5 bg-white group-hover:bg-gold text-black font-bold uppercase tracking-[0.25em] text-[9px] transition-all duration-300 shadow-md cursor-pointer"
                   >
-                    <span>INQUIRE PASSES</span>
+                    <span>BOOK EVENT</span>
                     <ArrowRight className="w-3.5 h-3.5 text-black group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
@@ -293,7 +371,7 @@ export default function TourSection({ onScrollToSection, onDownloadEPK }: TourSe
         Floating Hover Image Preview that follows the cursor seamlessly
       */}
       <AnimatePresence>
-        {hoveredShow && (
+        {hoveredEvent && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -307,7 +385,7 @@ export default function TourSection({ onScrollToSection, onDownloadEPK }: TourSe
             }}
             className="fixed pointer-events-none z-[80] hidden lg:block"
           >
-            <div className="relative w-52 h-64 bg-neutral-950 border border-gold/40 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_25px_rgba(212,175,55,0.2)]">
+            <div className="relative w-56 h-64 bg-neutral-950 border border-gold/40 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_25px_rgba(212,175,55,0.2)]">
               {/* Corner Accents */}
               <div className="absolute top-1.5 left-1.5 w-2.5 h-2.5 border-t border-l border-gold z-20" />
               <div className="absolute top-1.5 right-1.5 w-2.5 h-2.5 border-t border-r border-gold z-20" />
@@ -315,19 +393,19 @@ export default function TourSection({ onScrollToSection, onDownloadEPK }: TourSe
               <div className="absolute bottom-1.5 right-1.5 w-2.5 h-2.5 border-b border-r border-gold z-20" />
 
               <Image
-                src={hoveredShow.image}
-                alt={hoveredShow.venue}
+                src={hoveredEvent.image}
+                alt={hoveredEvent.venue}
                 fill
-                sizes="220px"
+                sizes="240px"
                 className="object-cover filter contrast-[1.05] brightness-[1.02]"
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/20" />
 
               {/* Float Preview Card Overlay */}
-              <div className="absolute bottom-2 left-2 right-2 p-2 bg-black/75 backdrop-blur-md border border-white/10 text-[8px] font-mono tracking-widest uppercase">
-                <span className="text-gold font-bold block">{hoveredShow.city}</span>
-                <span className="text-neutral-300 truncate block">{hoveredShow.venue}</span>
+              <div className="absolute bottom-2 left-2 right-2 p-2 bg-black/80 backdrop-blur-md border border-white/10 text-[8px] font-mono tracking-widest uppercase">
+                <span className="text-gold font-bold block">{hoveredEvent.city}</span>
+                <span className="text-neutral-200 truncate block font-serif text-xs">{hoveredEvent.venue}</span>
               </div>
             </div>
           </motion.div>

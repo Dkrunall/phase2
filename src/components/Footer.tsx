@@ -75,7 +75,7 @@ export default function Footer({ onScrollToSection, onDownloadEPK }: FooterProps
   const navLinks = [
     { label: 'HOME', number: '01', action: scrollToTop },
     { label: 'THE DUO', number: '02', action: () => onScrollToSection('statements') },
-    { label: 'TOUR DATES', number: '03', action: () => onScrollToSection('tour-section') },
+    { label: 'PAST EVENTS', number: '03', action: () => onScrollToSection('tour-section') },
     { label: 'LIVE REELS', number: '04', action: () => onScrollToSection('reels-section') },
     { label: 'LOOKBOOK', number: '05', action: () => onScrollToSection('gallery-section') },
     { label: 'RESERVATIONS', number: '06', action: () => onScrollToSection('booking-section') },
@@ -134,19 +134,30 @@ export default function Footer({ onScrollToSection, onDownloadEPK }: FooterProps
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-16 md:py-20 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-start">
           
-          {/* Column 1: Monogram & Direct Contact Pill (Span 4) */}
+          {/* Column 1: Monogram & Direct Contact Pill (Span 5) */}
           <div className="md:col-span-5 space-y-6">
             <div 
               onClick={scrollToTop}
               data-cursor="TOP"
-              className="inline-block cursor-pointer group"
+              className="inline-flex flex-col cursor-pointer group space-y-3"
             >
-              <div className="font-serif text-2xl sm:text-4xl font-black tracking-[0.2em] text-white flex items-center space-x-1">
-                <span>PHASE</span>
-                <span className="text-gold group-hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.8)] transition-all duration-300">2</span>
+              <div className="relative w-16 h-15 sm:w-20 sm:h-18">
+                <Image
+                  src="/images/phase2-logo-white.png"
+                  alt="PHASE 2"
+                  width={80}
+                  height={76}
+                  className="w-auto h-14 sm:h-16 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] group-hover:drop-shadow-[0_0_20px_rgba(212,175,55,0.5)] transition-all duration-300"
+                />
               </div>
-              <div className="text-[9px] uppercase tracking-[0.4em] text-neutral-400 font-mono mt-1 group-hover:text-gold transition-colors">
-                RABIA &amp; MARIYA &bull; SISTER DUO
+              <div>
+                <div className="font-serif text-2xl sm:text-3xl font-black tracking-[0.2em] text-white flex items-center space-x-1">
+                  <span>PHASE</span>
+                  <span className="text-gold group-hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.8)] transition-all duration-300">2</span>
+                </div>
+                <div className="text-[9px] uppercase tracking-[0.4em] text-neutral-400 font-mono mt-1 group-hover:text-gold transition-colors">
+                  RABIA &amp; MARIYA &bull; SISTER DUO
+                </div>
               </div>
             </div>
 

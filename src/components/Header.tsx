@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { Download, Mail, Copy, Check, ExternalLink, ArrowRight } from 'lucide-react';
 
 interface HeaderProps {
@@ -77,7 +78,7 @@ export default function Header({ onScrollToSection, onDownloadEPK }: HeaderProps
   const navItems = [
     { label: 'HOME', id: 'home', key: 'home', isScrollTop: true },
     { label: 'THE DUO', id: 'statements', key: 'duo' },
-    { label: 'TOUR', id: 'tour-section', key: 'tour' },
+    { label: 'PAST EVENTS', id: 'tour-section', key: 'tour' },
     { label: 'GALLERY', id: 'gallery-section', key: 'gallery' },
     { label: 'RESERVATIONS', id: 'booking-section', key: 'booking' },
   ];
@@ -115,14 +116,26 @@ export default function Header({ onScrollToSection, onDownloadEPK }: HeaderProps
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               data-cursor="HOME"
-              className="cursor-pointer group flex items-center space-x-1 sm:space-x-1.5 focus:outline-none"
+              className="cursor-pointer group flex items-center space-x-2 sm:space-x-2.5 focus:outline-none"
             >
-              <span className="font-serif text-base sm:text-xl font-black tracking-[0.2em] sm:tracking-[0.25em] text-white">
-                PHASE
-              </span>
-              <span className="font-serif text-base sm:text-xl font-black text-gold group-hover:drop-shadow-[0_0_10px_rgba(212,175,55,0.8)] transition-all">
-                2
-              </span>
+              <div className="relative h-7 sm:h-8 w-auto flex items-center">
+                <Image
+                  src="/images/phase2-logo-white.png"
+                  alt="PHASE 2"
+                  width={38}
+                  height={36}
+                  className="h-7 sm:h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+                  priority
+                />
+              </div>
+              <div className="hidden xs:flex items-baseline space-x-0.5">
+                <span className="font-serif text-sm sm:text-lg font-black tracking-[0.2em] text-white">
+                  PHASE
+                </span>
+                <span className="font-serif text-sm sm:text-lg font-black text-gold group-hover:drop-shadow-[0_0_10px_rgba(212,175,55,0.8)] transition-all">
+                  2
+                </span>
+              </div>
             </button>
 
             {/* Live Tour status pill (hidden on small screens) */}
@@ -251,9 +264,22 @@ export default function Header({ onScrollToSection, onDownloadEPK }: HeaderProps
 
             {/* Navigation Links with Editorial Index Numbers */}
             <div className="relative z-10 flex flex-col space-y-3 pt-2">
-              <div className="text-[9px] font-mono tracking-[0.4em] text-neutral-500 uppercase pb-2 border-b border-white/10 flex items-center justify-between">
-                <span>// AWWWARDS FLOATING INDEX</span>
-                <span className="text-gold">RABIA &bull; MARIYA</span>
+              <div className="pb-3 border-b border-white/10 flex items-center justify-between">
+                <div className="flex items-center space-x-2.5">
+                  <Image
+                    src="/images/phase2-logo-white.png"
+                    alt="PHASE 2"
+                    width={34}
+                    height={32}
+                    className="h-8 w-auto object-contain"
+                  />
+                  <span className="font-serif text-lg font-black tracking-[0.2em] text-white">
+                    PHASE <span className="text-gold">2</span>
+                  </span>
+                </div>
+                <span className="text-[8px] font-mono tracking-widest text-gold uppercase">
+                  RABIA &bull; MARIYA
+                </span>
               </div>
 
               {navItems.map((item, index) => (

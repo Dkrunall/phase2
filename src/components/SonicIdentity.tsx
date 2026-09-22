@@ -12,7 +12,6 @@ interface FrequencyTrack {
   bpm: number;
   keyNote: string;
   region: string;
-  stems: { label: string; active: boolean; height: string }[];
 }
 
 export default function SonicIdentity() {
@@ -29,12 +28,6 @@ export default function SonicIdentity() {
       bpm: 126,
       keyNote: 'F# MINOR',
       region: 'MUMBAI // LONDON',
-      stems: [
-        { label: 'SUB BASS', active: true, height: 'h-8' },
-        { label: 'DHOLIC STEMS', active: true, height: 'h-10' },
-        { label: 'CLUB HI-HATS', active: true, height: 'h-7' },
-        { label: 'HYPNOTIC VOCALS', active: true, height: 'h-9' },
-      ]
     },
     {
       id: 'afro-house',
@@ -43,12 +36,6 @@ export default function SonicIdentity() {
       bpm: 124,
       keyNote: 'A MINOR',
       region: 'GLOBAL TRIBAL',
-      stems: [
-        { label: 'ORGANIC BASS', active: true, height: 'h-7' },
-        { label: 'TRIBAL DRUMS', active: true, height: 'h-10' },
-        { label: 'SHAKER GROOVE', active: true, height: 'h-6' },
-        { label: 'SOUL VOX', active: true, height: 'h-8' },
-      ]
     },
     {
       id: 'tech-house',
@@ -57,12 +44,6 @@ export default function SonicIdentity() {
       bpm: 128,
       keyNote: 'D MINOR',
       region: 'IBIZA CLUBLAND',
-      stems: [
-        { label: 'PUNCHY KICK', active: true, height: 'h-10' },
-        { label: 'ROLLING SUB', active: true, height: 'h-9' },
-        { label: 'CRISP CLAP', active: true, height: 'h-7' },
-        { label: 'SYNTH STABS', active: true, height: 'h-8' },
-      ]
     },
     {
       id: 'melodic-deep',
@@ -71,12 +52,6 @@ export default function SonicIdentity() {
       bpm: 124,
       keyNote: 'C MINOR',
       region: 'AFTER-HOURS SUNRISE',
-      stems: [
-        { label: 'WARM REESE', active: true, height: 'h-7' },
-        { label: 'ATMOSPHERIC ARPS', active: true, height: 'h-9' },
-        { label: 'SUBTLE CLICK', active: true, height: 'h-5' },
-        { label: 'SWEEPING PADS', active: true, height: 'h-8' },
-      ]
     }
   ];
 
@@ -400,40 +375,6 @@ export default function SonicIdentity() {
                 </button>
               );
             })}
-          </div>
-
-          {/* Interactive Stems Spectrum Equalizer Display */}
-          <div className="p-4 sm:p-6 bg-black/60 border border-white/5 space-y-4">
-            <div className="flex items-center justify-between text-[8px] sm:text-[9px] font-mono tracking-widest text-neutral-500 uppercase">
-              <span>LIVE FREQUENCY CHANNELS</span>
-              <span className="text-gold animate-pulse">STEREO ACTIVE</span>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
-              {currentTrack.stems.map((stem, sIdx) => (
-                <div 
-                  key={stem.label}
-                  className="p-2.5 sm:p-3 bg-neutral-950 border border-neutral-900 flex flex-col justify-between space-y-2.5 sm:space-y-3 group hover:border-gold/30 transition-colors"
-                >
-                  <div className="flex items-center justify-between text-[7px] sm:text-[8px] font-mono text-neutral-400">
-                    <span>CH 0{sIdx + 1}</span>
-                    <span className="text-gold font-bold">SOLO</span>
-                  </div>
-
-                  {/* Dynamic Equalizer Bar simulation */}
-                  <div className="flex items-end space-x-1 h-10 sm:h-12 pt-2">
-                    <span className="flex-1 bg-gold/30 group-hover:bg-gold transition-all duration-300 rounded-none animate-pulse" style={{ height: `${40 + (sIdx * 15)}%`, animationDuration: '0.4s' }} />
-                    <span className="flex-1 bg-gold/50 group-hover:bg-gold transition-all duration-300 rounded-none animate-pulse" style={{ height: `${75 - (sIdx * 10)}%`, animationDuration: '0.6s' }} />
-                    <span className="flex-1 bg-gold group-hover:bg-gold transition-all duration-300 rounded-none animate-pulse" style={{ height: `${90 - (sIdx * 8)}%`, animationDuration: '0.5s' }} />
-                    <span className="flex-1 bg-gold/70 group-hover:bg-gold transition-all duration-300 rounded-none animate-pulse" style={{ height: `${60 + (sIdx * 8)}%`, animationDuration: '0.7s' }} />
-                  </div>
-
-                  <span className="text-[8px] sm:text-[9px] font-mono tracking-wider text-white uppercase font-semibold truncate">
-                    {stem.label}
-                  </span>
-                </div>
-              ))}
-            </div>
           </div>
 
         </div>
