@@ -23,6 +23,13 @@ const tenor = Tenor_Sans({
   display: "swap",
 });
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#000000',
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://phase2music.com'),
   title: "PHASE2 | Official Website | DJ Sister Duo",
